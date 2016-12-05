@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DapperProject.Models.Mobiles>
+
+@{
+    ViewBag.Title = "Microsoft Mobiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<h2><span id="mobile" style="color:crimson">Microsoft Mobiles</span></h2>
+<div class="row">
+    @foreach (var m in Model)
+    {
+
+        <div class="col-md-4">
+            <div class="row">
+                <h4><span id="mobilename" style="color:darkred">@m.MobileName</span></h4>
+                <p><span class="glyphicon glyphicon-heart" style="color:red;pointer-events:fill" contextmenu="Added To WishList" ></span></p>
+                
+
+            </div>
+           
+
+            <p>
+                <img src="~/Images/@m.Url" style="overflow: hidden; position: relative; width:200px; height:200px;" />
+            </p>
+            <p><a class="btn btn-default" href="">View More &raquo;</a><p><span class="glyphicon glyphicon-shopping-cart" style="color:green"></span></p>
+</p>
+        </div>
+
+    }
+</div>
+
+
+
+    

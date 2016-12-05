@@ -1,0 +1,113 @@
+﻿@model IEnumerable<DapperProject.Models.ProductDetails>
+@{
+    ViewBag.Title = "EachProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.rawgit.com/elevateweb/elevatezoom/master/jquery.elevateZoom-3.0.8.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    document.write('<base href="' + document.location + '" />');
+ </script>
+<style type="text/css">
+ /* #####################################################################
+   #
+   #   Project       : MOBBI99
+   #   Author        : Debendra Dash
+   #   Version       : 1.0
+   #   Created       : 02/12/2016
+   #   
+   #
+   ##################################################################### */
+
+    </style>
+
+
+
+<link rel="stylesheet" href="style.css">
+<link href="http://www.professorcloud.com/styles/cloud-zoom.css" rel="stylesheet" type="text/css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+<script type="text/JavaScript" src="http://www.professorcloud.com/js/cloud-zoom.1.0.2.js"></script>
+<script src="~/Scripts/app.js"></script>
+
+
+<h3>Product Specification</h3>
+
+<div ng-controller="MainCtrl">
+
+
+
+    @foreach (var x in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@x.MobileName</div>
+            <div class="panel-body">
+                <div class="col-sm-3 col-md-6" style="color:blue">
+                    <a href="http://localhost:56829/ZoomImages/@x.Url" class="cloud-zoom" rel="adjustX: 10, adjustY:-4">
+                        <img src="~/Images/@x.Url" width="400" height="400" />
+                    </a>
+
+                </div>
+                <div class="col-sm-9 col-md-6">
+                    <h3><span id="mobilename" style="color:black"><b>MobileName:</b></span></h3>
+
+                    <h6><span id="mobilename" style="color:black">@x.MobileName</span></h6>
+
+                    <h3><span id="mobilename" style="color:black"><b>Features:</b></span></h3>
+                    
+                    <h6><span id="mobilename" style="color:black">@x.Features</span></h6>
+                    
+                    <h3><span id="mobilename" style="color:black"><b>Color:</b></span></h3>
+                    <h4><span id="mobilename" style="color:black">@x.color</span></h4>
+                    <h3><span id="mobilename" style="color:black"><b>Sim Type</b></span></h3>
+                    <h4><span id="mobilename" style="color:black">@x.SimType</span></h4>
+                    <h3><span id="mobilename" style="color:black"><b>Model:</b></span></h3>
+
+                    <h6><span id="mobilename" style="color:black">@x.model</span></h6>
+
+                    <h3><span id="mobilename" style="color:black"><b>Price:</b></span></h3>
+
+                    <h6><span id="mobilename" style="color:black">@x.Price</span></h6>
+
+
+                </div>
+                
+
+              
+
+             
+
+            </div>
+
+            <div>
+
+                <a  id="btn_add" href="@Url.Action("Add", "AddToCart",x)" class="btn btn-info btn-lg" style="margin-left:60px">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+                </a>
+
+                <a id="btn_add" href="@Url.Action("Index", "Home")" class="btn btn-info btn-lg" style="margin-left:60px">
+                    <span class="glyphicon glyphicon-eye-open"></span> Continue shopping
+                </a>
+                <br />
+                <br />
+
+            </div>
+        </div>
+    }
+
+    
+
+  
+
+</div>
+
+
+

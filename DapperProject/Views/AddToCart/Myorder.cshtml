@@ -1,0 +1,155 @@
+﻿@model IEnumerable<DapperProject.Models.Mobiles>
+@{
+    ViewBag.Title = "Myorder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    int sum = 0;
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+    .label
+{
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Arial;
+}
+.contents
+{
+    border: 1px dotted black;
+    padding: 5px;
+    width: 300px;
+}
+.name
+{
+    color: #18B5F0;
+}
+.left
+{
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+.right
+{
+    margin-left: 60px;
+    line-height:50px;
+}
+.clear
+{
+    clear: both;
+}
+ #footer
+{
+    position:fixed;
+    bottom: 0px;
+    height: 3px;
+    background-color: #666;
+    color: #eee;
+    width:100%
+}
+
+</style>
+<script type="text/javascript">
+$(function () {
+    $("#btnPrint").click(function () {
+        var contents = $("#dvContents").html();
+        var frame1 = $('<iframe />');
+        frame1[0].name = "frame1";
+        frame1.css({ "position": "absolute", "top": "-1000000px" });
+        $("body").append(frame1);
+        var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+        frameDoc.document.open();
+        //Create a new HTML document.
+        frameDoc.document.write('<html><head><title>DIV Contents</title>');
+        frameDoc.document.write('</head><body>');
+        //Append the external CSS file.
+        frameDoc.document.write('<link href="style.css" rel="stylesheet" type="text/css" />');
+        //Append the DIV contents.
+        frameDoc.document.write(contents);
+        frameDoc.document.write('</body></html>');
+        frameDoc.document.close();
+        setTimeout(function () {
+            window.frames["frame1"].focus();
+            window.frames["frame1"].print();
+            frame1.remove();
+        }, 500);
+    });
+});
+</script>
+
+
+
+<div id="dvContents">
+    
+    <table class="table table-hover" width="100%">
+        <thead>
+            <img src="~/Templates/Header.jpg" width="100%" height="70px" />
+            <tr>
+               
+                <th>SlNO</th>
+                <th>Mobile Name</th>
+
+                <th>Image</th>
+                <th>Price</th>
+
+                <th>Remove</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                   
+                    <td>@x.slno</td>
+                    <td>@x.MobileName</td>
+                    <td>
+
+                        <img id="img1" src="~/Images/@x.Url" height="100" width="75" />
+
+                    </td>
+                    <td>&#8377;@x.Price</td>
+
+                    <td>
+
+
+                        <button id="btn_delete" class="label label-primary" data-slno="@x.slno" onclick="location.href='@Url.Action("Remove","AddToCart",x)'">
+                            <img src="~/Icons/delete.png" height="30" width="30" />
+                        </button>
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+
+        @foreach (var x in Model)
+        {
+            sum = Convert.ToInt32(x.Price) + sum;
+
+        }
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+               
+                <td><b>Total</b></td>
+                <td>
+                    &#8377;  @sum
+                </td>
+            </tr>
+           
+        </tfoot>
+       
+    </table>
+    <div id="footer">
+        <img src="~/Templates/Footer.jpg" width="100%" height="60px" />
+    </div>
+   
+    <button type="button" id="btnPrint"  class="btn btn-primary">Print</button>
+    <button type="button" class="btn btn-success">Continue Shopping</button>
+    <button type="button" class="btn btn-warning">Place Order</button>
+</div>

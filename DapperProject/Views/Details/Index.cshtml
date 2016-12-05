@@ -1,0 +1,172 @@
+﻿@model IEnumerable<DapperProject.Models.productDetails>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+<style type="text/css">
+    .nav-tabs {
+    margin-bottom: 15px;
+}
+.sign-with {
+    margin-top: 25px;
+    padding: 20px;
+    margin-right:100px
+}
+    
+ 
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".edit").click(function () {
+            var prodName = $(this).attr('data-name');
+            var prodet = $(this).attr('data-prodet');
+            var price = $(this).attr('data-price');
+            var slno = $(this).attr('data-slno');
+            $('#myModal').modal('show');
+            $('#txt_pname').val(prodName);
+            $('#txt_brand').val(prodet);
+            $('#txt_price').val(price);
+            
+    })
+    });
+
+</script>
+@*<div style="margin-left:10px;margin-top:10px">
+    <table>
+        <tr>
+           
+            <td>
+                <button id="btn_delete" class="label label-primary">
+                    <img src="~/Icons/Recycle.png" width="40" height="40" />
+                </button>
+
+            </td>
+        </tr>
+    </table>
+   
+   
+    
+</div>*@
+<h3 style="margin-left:400px"><b>Indian Mobile Sales</b></h3>
+
+<div class="container" style="width:850px">
+    
+   
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>SlNO</th>
+                <th>Product Details</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+      
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chk_select" width="25" height="30">
+
+                    </td>
+                    <td>@x.slno</td>
+                    <td>@x.productDetail</td>
+                    <td>@x.productName</td>
+                    <td>RS:@x.price</td>
+                    <td>
+                   <button id="btn_edit" class="edit" data-name="@x.productName" data-slno="@x.slno" data-price="@x.price" data-prodet="@x.productDetail" style="background-image: url(/Icons/EDIT.png) ">
+                       <img src="~/Icons/pencil.png" height="30" width="30"/>
+                   </button>
+                     
+
+                    </td>
+                    <td><button id="btn_delete" class="label label-primary" data-slno="@x.slno">
+                            <img src="~/Icons/delete.png" height="30" width="30" />
+                        </button></td>
+                </tr>
+
+            }
+           
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade"  id="myModal" role="dialog" aria-labelledby="myLargeModalLabel" 
+     aria-hidden="true" style="right:300px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h4 class="modal-title" id="myModalLabel">
+                  Please Edit your Information.
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                       
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                          Name
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="txt_pname" placeholder="Product Name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" class="col-sm-2 control-label">
+                                          Brand
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="txt_brand" placeholder="Brand name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" class="col-sm-2 control-label">
+                                           Price
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="txt_price" placeholder="price" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                Submit
+                                            </button>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                           
+                                       
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
